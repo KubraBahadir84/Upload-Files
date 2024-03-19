@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Calismam</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="upload-box">
+      <div class="upload-text">
+        <p id="uploadfilestext">Upload Files</p>
+        <p id="uploaddoctext">Upload documents you want to share with your team.</p>
+      </div>
+      <div class="dragging-space">
+        <p id="dragInstructions">Drag your
+           <br><span>STEP| STP | SLDPRT | DXF | IPT | X_T | X_B | 3DXML | CATPART | PRT | SAT | 3MF | JT</span><br>
+           files </p>
+        <p id="orText">OR</p>
+        <label for="fileInput" id="fileInputLabel">  
+          <img class="icon-container" src="Frame 28.svg"/> Browse Files
+        </label>
+        <input type="file" id="fileInput" accept=".obj,.stl,.glb,.gltf"> <!-- arttır -->  
+      </div>
+    </div>
+  </div>
+
+  <div id="viewerContainer"></div>
+  <div id="fileProperties"></div>
+
+  <script src="script.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</body>
+</html>

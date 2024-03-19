@@ -1,0 +1,110 @@
+body {
+  background-color: #054a9e; /*bu kısmı değiştirmeyi unutma*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+  position: relative;
+}
+
+.upload-text {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.upload-box {
+  width: 90%;
+  max-width: 579px;
+  background-color: #fff;
+  border-radius: 30px;
+  box-shadow: 0px 30px 50px #0077e5; /*buraya bak*/
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  position: relative;
+}
+
+#uploadfilestext {
+  color: #054a9e;
+  font-weight: 900;
+  font-size: 45px;
+  width: 411px;
+  height: 33px;
+  text-align: center;
+}
+
+#uploaddoctext {
+  color: #4e4b4b;
+  font-weight: 200;
+  font-size: 16px;
+}
+
+#dragInstructions {
+  color: #054a9e;
+  font-weight: 400;
+  font-size: 16px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+#dragInstructions span {
+  color: #4e4b4b;
+  text-align: center;
+}
+
+#orText {
+  color: #054a9e;
+  font-size: 25px;
+  font-weight: 900;
+  text-align: center;
+}
+
+.dragging-space {
+  width: 100%;
+  max-width: 500px;
+  height: 300px;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 2px dashed #054a9e; margin-bottom: 30px ;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
+#fileInputLabel {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 277px;
+  height: 50px;
+  background-color: #054a9e;
+  color: #fff;
+  border-radius: 7px;
+  font-size: 24px;
+  font-weight: 400;
+  
+}
+
+#fileInputLabel:hover {
+  background-color: #0056b3;
+}
+
+#fileInput {
+  display: none;
+}
+
+.icon-container {
+  width: 30px;
+  height: 30px;
+  margin-left: 5px;
+}
