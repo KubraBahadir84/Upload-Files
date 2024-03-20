@@ -22,7 +22,7 @@ body {
   max-width: 579px;
   background-color: #fff;
   border-radius: 30px;
-  box-shadow: 0px 30px 50px #0077e5; /*buraya bak*/
+  box-shadow: 10px 10px 10px hsl(209, 100%, 15%); /*buraya bak*/
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -33,16 +33,16 @@ body {
 #uploadfilestext {
   color: #054a9e;
   font-weight: 900;
-  font-size: 45px;
-  width: 411px;
-  height: 33px;
+  font-size: 50px;
+  width: 450px;
+  height: 30px;
   text-align: center;
 }
 
 #uploaddoctext {
   color: #4e4b4b;
   font-weight: 200;
-  font-size: 16px;
+  font-size: 19px;
 }
 
 #dragInstructions {
@@ -66,7 +66,7 @@ body {
 }
 
 .dragging-space {
-  width: 100%;
+  width: 80%;
   max-width: 500px;
   height: 300px;
   border-radius: 20px;
@@ -84,19 +84,23 @@ body {
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 20px;
   width: 277px;
   height: 50px;
-  background-color: #054a9e;
+  background-color: hsl(210, 100%, 30%);
   color: #fff;
-  border-radius: 7px;
+  border-radius: 20px;
   font-size: 24px;
   font-weight: 400;
   
 }
 
 #fileInputLabel:hover {
-  background-color: #0056b3;
+  background-color: hsl(210, 100%, 35%);
+}
+
+#fileInputLabel:active {
+  background-color: hsl(210, 100%, 40%);
 }
 
 #fileInput {
@@ -106,5 +110,9 @@ body {
 .icon-container {
   width: 30px;
   height: 30px;
-  margin-left: 5px;
+  margin-left: 30px;
+}
+
+.dragging-space:active {
+  background-color: aliceblue;
 }

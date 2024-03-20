@@ -7,29 +7,139 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <script src="js/three.js"></script>
+    <script>
+      const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+      renderer.setSize( window.innerWidth, window.innerHeight );
+      document.body.appendChild( renderer.domElement );
+
+      const geometry = new THREE.BoxGeometry();
+      const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+      const cube = new THREE.Mesh( geometry, material );
+      scene.add( cube );
+
+      camera.position.z = 5;
+
+      function animate() {
+        requestAnimationFrame( animate );
+
+        cube.rotation.x += 0.01;
+        cube.rotation.y += 0.01;
+
+        renderer.render( scene, camera );
+      };
+
+      animate();
+    </script>
+
+<script type="importmap">
+            {
+                "imports": {
+                    "three": "./node_modules/three/build/three.module.js",
+                    "stl-loader": "./node_modules/three/examples/jsm/loaders/STLLoader.js",
+                }
+            }
+</script>
+  <script type="importmap"> 
+    { 
+      "imports": { 
+        "nameOfImport": "location", 
+        "nameOfSecondImport": "secondLocation" 
+        }       
+    } 
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/loaders/GLTFLoader.js"></script>
   <div class="container">
     <div class="upload-box">
       <div class="upload-text">
         <p id="uploadfilestext">Upload Files</p>
         <p id="uploaddoctext">Upload documents you want to share with your team.</p>
       </div>
-      <div class="dragging-space">
+      <div class="dragging-space" id="draggingSpace">
         <p id="dragInstructions">Drag your
-           <br><span>STEP| STP | SLDPRT | DXF | IPT | X_T | X_B | 3DXML | CATPART | PRT | SAT | 3MF | JT</span><br>
+           <br><span>STEP| STP | SLDPRT | DXF | IPT | X_T | X_B | 3DXML | CATPART | PRT | SAT | 3MF | JT | OBJ | STL | GLB | GLTF</span><br>
            files </p>
         <p id="orText">OR</p>
         <label for="fileInput" id="fileInputLabel">  
           <img class="icon-container" src="Frame 28.svg"/> Browse Files
         </label>
-        <input type="file" id="fileInput" accept=".obj,.stl,.glb,.gltf"> <!-- arttır -->  
+        <input type="file" id="fileInput" accept=".step,.stp,.sldprt,.dxf,.ipt,.x_t,.x_b,.3dxml,.catpart,.prt,.sat,.3mf,.jt,.obj,.stl,.glb,.gltf"> <!-- arttır -->  
       </div>
     </div>
+    <div id="viewerContainer" class="viewer-container" style="display: none;"></div>
   </div>
 
-  <div id="viewerContainer"></div>
   <div id="fileProperties"></div>
 
-  <script src="script.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  
+  <script>
+    const viewerContainer = document.getElementById('viewerContainer');
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth / 2, window.innerHeight / 2);
+    viewerContainer.appendChild(renderer.domElement);
+
+    camera.position.z = 5;
+
+    const controls = new THREE.OrbitControls(camera, renderer.domElement);
+
+    const draggingSpace = document.getElementById('draggingSpace');
+
+    draggingSpace.addEventListener('dragover', (event) => {
+      event.preventDefault();
+      draggingSpace.style.backgroundColor = 'rgba(5, 74, 158, 0.5)';
+    });
+
+    draggingSpace.addEventListener('dragenter', (event) => {
+      event.preventDefault();
+      draggingSpace.style.backgroundColor = 'rgba(5, 74, 158, 0.5)';
+    });
+
+    draggingSpace.addEventListener('dragleave', (event) => {
+      event.preventDefault();
+      draggingSpace.style.backgroundColor = '';
+    });
+
+    draggingSpace.addEventListener('drop', (event) => {
+      event.preventDefault();
+      draggingSpace.style.backgroundColor = '';
+      const file = event.dataTransfer.files[0];
+      if (file && isAcceptedFileType(file)) {
+        handleFileUpload(file);
+      }
+    });
+
+    document.getElementById("fileInput").addEventListener("change", function(event) {
+        const file = event.target.files[0]
+        if (file && isAcceptedFileType(file)) {
+            handleFileUpload(file);
+        }
+    });
+
+    function isAcceptedFileType(file) {
+        const acceptedTypes = ['model/step', 'model/stp', 'model/sldprt', 'model/dxf', 'model/ipt', 'model/x_t', 'model/x_b', 'model/3dxml', 'model/catpart', 'model/prt', 'model/sat', 'model/3mf', 'model/jt', 'model/obj', 'model/stl', 'model/glb', 'model/gltf'];
+        return acceptedTypes.includes(file.type);
+    }
+
+    function handleFileUpload(file) {
+        const reader = new FileReader()
+        reader.onload = function(e) {
+            const data = e.target.result
+            loadModel(data);
+        }
+        reader.readAsDataURL(file)
+    }
+
+    function loadModel(modelData) {
+        const loader = new THREE.GLTFLoader();
+        loader.load(modelData, (gltf) => {
+            scene.add(gltf.scene);
+            viewerContainer.style.display = 'block'; // Görüntüleme alanını görünür yap
+        });
+    }
+  </script>
 </body>
 </html>
